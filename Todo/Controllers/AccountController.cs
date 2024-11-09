@@ -47,7 +47,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction(nameof(TodoController.Index), "Index");
+                return RedirectToAction(nameof(TodoController.Index), "todo");
             }
             foreach (var error in result.Errors)
             {
@@ -67,6 +67,7 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginModel login)
     {
+        ViewBag.errors = null;
         if (!ModelState.IsValid)
         {
             _logger.LogInformation("Invalid model state");
@@ -79,7 +80,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 _logger.LogInformation($"User {login.Email} successfully logged in.");
-                return RedirectToAction(nameof(TodoController.Index), "Index");
+                return RedirectToAction(nameof(TodoController.Index), "todo");
             }
             else if (result.IsLockedOut)
             {
@@ -94,9 +95,10 @@ public class AccountController : Controller
             else
             {
                 _logger.LogWarning($"Failed login attempt for {login.Email}");
+                ViewBag.errors = ModelState.Values.SelectMany(tmp => tmp.Errors).Select(tmp => tmp.ErrorMessage).ToList();
                 ModelState.AddModelError("Login", "Invalid Email or Password");
             }
-            return RedirectToAction(nameof(TodoController.Index), "Index");
+            return RedirectToAction(nameof(TodoController.Index), "todo");
         }
 
         ViewBag.errors = ModelState.Values.SelectMany(tmp => tmp.Errors).Select(tmp => tmp.ErrorMessage).ToList();

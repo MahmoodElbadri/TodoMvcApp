@@ -18,13 +18,11 @@
 
 
     <div class="row mt-4">
-        <div class="col-4">
-            <button type="button" asp-action="Edit" class="btn btn-primary w-100">Edit</button>
+        <div class="col-6">
+            <a type="button" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary w-100">Edit</a>
         </div>
-        <div class="col-4">
-            <a type="button" asp-action="Index" class="btn btn-success w-100">Completed?</a>
-        </div>
-        <div class="col-4">
+        
+        <div class="col-6">
             <a type="button" asp-action="Index" class="btn btn-danger w-100">Back To My Tasks</a>
         </div>
     </div>

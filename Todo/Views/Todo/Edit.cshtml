@@ -1,11 +1,12 @@
-﻿@model TodoTaskAddRequest
+﻿@model TodoTaskUpdateRequest
 @{
-    ViewData["Title"] = "AddTodo";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>AddTodo</h1>
+<h1>Edit My Task</h1>
 
-<form asp-action="AddTodo" method="post">
+
+<form asp-action="Edit" method="post">
     <div>
         <label asp-for="@Model.Title" class="form-label mt-4"></label>
         <input asp-for="@Model.Title" class="form-control" aria-describedby="textHelp" placeholder="Enter Todo Description">
@@ -17,11 +18,10 @@
         <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
     </div>
 
-    <input type="hidden" asp-for="@Model.UserId" />
 
     <div class="row mt-4">
         <div class="col-6">
-            <button type="submit" class="btn btn-primary w-100">Create</button>
+            <button type="submit" class="btn btn-primary w-100">Update</button>
         </div>
         <div class="col-6">
             <a type="button" asp-action="Index" class="btn btn-danger w-100">Back and Discard</a>
