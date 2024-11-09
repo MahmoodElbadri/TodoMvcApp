@@ -15,4 +15,5 @@ public class TodoTaskUpdateRequest
     [MaxLength(2000)]
     public string? Description { get; set; }
     public bool IsCompleted { get; set; }
+    public string? ImageUrl { get; set; }
 }

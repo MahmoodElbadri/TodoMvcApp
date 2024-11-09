@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Todo.Models.IdentityModels.ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Welcome";
+    var user = await UserManager.GetUserAsync(User);
+    var personName = user?.PersonName ?? "User";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="welcome-background">
+    <div class="welcome-content">
+        <div class="welcome-title">
+            Your Tasks Are Here and Waiting For You :)
+        </div>
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <div class="welcome-username">
+                Hello, Let's create your first task @personName
+                @* <span class="welcome-username-text">
+                </span> *@
+                <a asp-action="addtodo" asp-controller="todo" class="btn btn-primary">Add New Task</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                New Member? <a asp-action="Register" asp-controller="Account" class="btn btn-primary">Register</a>
+            </div>
+
+            <div>
+                Already a Member? <a asp-action="Login" asp-controller="Account" class="btn btn-secondary">Login</a>
+            </div>
+        }
+    </div>
 </div>

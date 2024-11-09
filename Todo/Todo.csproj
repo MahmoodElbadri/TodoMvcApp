@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Todo.Repositories\Todo.RepositryContracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\todos\" />
+  </ItemGroup>
+
 </Project>

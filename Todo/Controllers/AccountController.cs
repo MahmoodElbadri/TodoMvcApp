@@ -47,7 +47,7 @@ public class AccountController : Controller
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction(nameof(TodoController.Index), "todo");
+                return RedirectToAction(nameof(HomeController.Index), "home");
             }
             foreach (var error in result.Errors)
             {
@@ -98,7 +98,7 @@ public class AccountController : Controller
                 ViewBag.errors = ModelState.Values.SelectMany(tmp => tmp.Errors).Select(tmp => tmp.ErrorMessage).ToList();
                 ModelState.AddModelError("Login", "Invalid Email or Password");
             }
-            return RedirectToAction(nameof(TodoController.Index), "todo");
+            return RedirectToAction(nameof(HomeController.Index), "home");
         }
 
         ViewBag.errors = ModelState.Values.SelectMany(tmp => tmp.Errors).Select(tmp => tmp.ErrorMessage).ToList();
@@ -109,7 +109,7 @@ public class AccountController : Controller
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction("Login");
+        return RedirectToAction(nameof(HomeController.Index), "home");
     }
 }
 

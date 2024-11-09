@@ -16,6 +16,10 @@
         <textarea asp-for="@Model.Description" disabled class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
     </div>
 
+    <div class="card-img-container mb-3">
+        <img src="~/images/todos/@Model.ImageUrl" class="card-img-top" alt="Todo Image" style="height: 120px; object-fit: cover;">
+    </div>
+
     <div class="row mt-4">
         <div class="col-6">
             <a type="button" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary w-100">Edit</a>

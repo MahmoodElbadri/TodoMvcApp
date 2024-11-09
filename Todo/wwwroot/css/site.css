@@ -28,6 +28,53 @@ body {
     z-index: 9999;
 }
 
-    #toast-container .toast {
-        opacity: 1;
+#toast-container .toast {
+opacity: 1;
+}
+
+.welcome-background {
+    background-image: url('/images/background.png'); /* Path to your image */
+    background-size: cover; /* Ensure the image covers the full screen */
+    background-position: center; /* Keep the background centered */
+    background-repeat: no-repeat;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+}
+
+.welcome-content {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 40px; /* Padding around content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Add floating effect with shadow */
+    max-width: 90%; /* Prevents the box from stretching too wide */
+    width: 500px; /* Set a fixed width */
+    text-align: center; /* Center the content text */
+    position: fixed; /* Fix the content in place */
+    top: 50%; /* Center vertically in the viewport */
+    left: 50%; /* Center horizontally in the viewport */
+    transform: translate(-50%, -50%); /* Offset to truly center */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+    .welcome-content:hover {
+        transform: translate(-50%, -52%); /* Slightly lift on hover */
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
     }
+
+.welcome-title {
+    font-size: 3rem; /* Large title size for desktops */
+    margin-bottom: 30px; /* Add space below the title */
+    color: #333; /* Darker text for readability */
+}
+
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 2rem; /* Smaller font size on mobile devices */
+    }
+}
+
+.btn {
+    margin: 10px; /* Add space between buttons */
+}

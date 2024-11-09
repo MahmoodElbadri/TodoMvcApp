@@ -13,8 +13,13 @@
     </div>
 
     <div>
-        <label asp-for="@Model.Description" class="form-label mt-4">Example textarea</label>
+        <label asp-for="@Model.Description" class="form-label mt-4">Your Task Description</label>
         <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
+    </div>
+
+    <div class="form-floating py-2 col-12">
+        <input type="file" asp-for="@Model.ImageUrl" name="file" class="form-control border-0 shadow" />
+        <label for="file" asp-for="@Model.ImageUrl" class="ms-2">Upload Image</label>
     </div>
 
     <input type="hidden" asp-for="@Model.UserId" />

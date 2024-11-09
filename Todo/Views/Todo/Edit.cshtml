@@ -13,6 +13,10 @@
         <small id="textHelp" class="form-text text-muted">We'll never share your secrets with anyone else.</small>
     </div>
 
+    <div class="card-img-container mb-3">
+        <img src="~/images/@Model.ImageUrl" class="card-img-top" alt="Todo Image" style="height: 120px; object-fit: cover;">
+    </div>
+
     <div>
         <label asp-for="@Model.Description" class="form-label mt-4">Example textarea</label>
         <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
