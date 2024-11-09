@@ -1,0 +1,30 @@
+﻿@model TodoTask
+@{
+    ViewData["Title"] = "AddTodo";
+}
+
+<h1>AddTodo</h1>
+
+<form asp-action="AddTodo" method="post">
+    <div>
+        <label asp-for="@Model.Title" class="form-label mt-4"></label>
+        <input asp-for="@Model.Title" class="form-control" aria-describedby="textHelp" placeholder="Enter Todo Description">
+        <small id="textHelp" class="form-text text-muted">We'll never share your secrets with anyone else.</small>
+    </div>
+
+    <div>
+        <label asp-for="@Model.Description" class="form-label mt-4">Example textarea</label>
+        <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
+    </div>
+
+    <input type="hidden" asp-for="@Model.UserId" />
+
+    <div class="row mt-4">
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary w-100">Create</button>
+        </div>
+        <div class="col-6">
+            <a type="button" asp-action="Index" class="btn btn-danger w-100">Back and Discard</a>
+        </div>
+    </div>
+</form>
