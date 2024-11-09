@@ -125,36 +125,6 @@ Users are authenticated via **ASP.NET Identity**. When a user logs in, their `Us
 | `GET`       | `/Todo/ChangeStatus/{id}`| Displays the task status page     |
 | `POST`      | `/Todo/ChangeStatus`     | Updates the task's completion status |
 
-## Folder Structure
-
-```
-TodoApp
-│
-├── Controllers
-│   └── TodoController.cs
-│
-├── Models
-│   ├── TodoTask.cs
-│   ├── TodoTaskResponse.cs
-│   ├── TodoTaskAddRequest.cs
-│   ├── TodoTaskUpdateRequest.cs
-│
-├── Repositories
-│   └── IUnitOfWork.cs
-│   └── TodoRepository.cs
-│
-├── Views
-│   ├── Todo
-│   │   ├── Index.cshtml
-│   │   ├── AddTodo.cshtml
-│   │   ├── Edit.cshtml
-│   │   ├── Details.cshtml
-│   │   ├── ChangeStatus.cshtml
-│
-└── wwwroot
-    └── images
-        └── todos (for storing task images)
-```
 
 ## License
 
