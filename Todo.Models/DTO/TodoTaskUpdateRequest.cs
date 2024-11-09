@@ -14,4 +14,5 @@ public class TodoTaskUpdateRequest
     [Required]
     [MaxLength(2000)]
     public string? Description { get; set; }
+    public bool IsCompleted { get; set; }
 }

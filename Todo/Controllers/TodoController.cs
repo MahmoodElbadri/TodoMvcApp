@@ -34,6 +34,11 @@ public class TodoController : Controller
         return View();
     }
 
+    /// <summary>
+    /// Add todo to the list of tasks
+    /// </summary>
+    /// <param name="todoTaskAddRequest"></param>
+    /// <returns>Task Response</returns>
     [HttpPost]
     public async Task<IActionResult> AddTodo(TodoTaskAddRequest todoTaskAddRequest)
     {
@@ -62,6 +67,12 @@ public class TodoController : Controller
         else
         {
             TodoTaskResponse todo = _mapper.Map<TodoTaskResponse>(todoTask);
+            string? currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (todoTask.UserId != currentUserId)
+            {
+                TempData["error"] = "Unauthorized Access";
+                return RedirectToAction("Index");
+            }
             return View(todo);
         }
     }
@@ -79,20 +90,24 @@ public class TodoController : Controller
         TodoTask? todoTask = await _unitOfWork.Todo.Find(u => u.Id == id);
         if (todoTask == null)
         {
-            return Json("NotFound"); // Return 404 if the task doesn't exist
+            TempData["error"] = "Task not found";
+            return RedirectToAction("Index");
+            // Return 404 if the task doesn't exist
         }
 
         // Step 3: Validate user ownership (check if the logged-in user is the owner)
         string? currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (todoTask.UserId != currentUserId)
         {
+            TempData["error"] = "Unauthorized Access";
             return Json("Unauthorized"); // Return 403 if the user doesn't own the task
         }
 
         // Step 4: Check if the task is already completed (business rule)
         if (todoTask.IsCompleted)
         {
-            return Json("Task is already completed"); // Return 400 if the task is completed
+            TempData["error"] = "Task is already completed";
+            return View("Index"); 
         }
 
         // Step 5: Update the task
@@ -131,6 +146,50 @@ public class TodoController : Controller
        TodoTaskUpdateRequest updateRequest = _mapper.Map<TodoTaskUpdateRequest>(todoTask); // Map incoming data onto the existing task
         
         return View(updateRequest);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ChangeStatus(int id)
+    {
+        TodoTask? todoTask = await _unitOfWork.Todo.Find(u => u.Id == id);
+        if (todoTask == null)
+        {
+            TempData["error"] = "Task not found";
+            return RedirectToAction("Index"); // Return 404 if the task doesn't exist
+        }
+        else
+        {
+            TodoTaskResponse todo = _mapper.Map<TodoTaskResponse>(todoTask);
+            string? currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (todoTask.UserId != currentUserId)
+            {
+                TempData["error"] = "Unauthorized Access";
+                return RedirectToAction("Index");
+            }
+            return View(todo);
+        }
+    }
+    [HttpPost]
+    [ActionName("ChangeStatus")]
+    public async Task<IActionResult> ChangeTaskStatus(int id, TodoTaskUpdateRequest model)
+    {
+        
+            
+        TodoTask? todoTask = await _unitOfWork.Todo.Find(u => u.Id == id);
+        if(todoTask != null)
+        {
+            todoTask.IsCompleted = model.IsCompleted;
+            await _unitOfWork.Todo.Update(todoTask);
+            await _unitOfWork.Save();
+
+            TempData["Success"] = "Task status updated successfully";
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            TempData["Error"] = "Something went wrong";
+            return RedirectToAction("Index");
+        }
     }
 
 }

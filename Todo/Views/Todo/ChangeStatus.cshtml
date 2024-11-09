@@ -1,11 +1,11 @@
 ﻿@model TodoTaskResponse
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Change The Task Status";
 }
 
 <h1>Details</h1>
 
-<form asp-action="AddTodo" method="post">
+<form asp-action="ChangeStatus" method="post">
     <div>
         <label asp-for="@Model.Title" class="form-label mt-4"></label>
         <input asp-for="@Model.Title" disabled class="form-control" aria-describedby="textHelp" placeholder="Enter Todo Description">
@@ -15,12 +15,16 @@
         <label asp-for="@Model.Description" class="form-label mt-4">Example textarea</label>
         <textarea asp-for="@Model.Description" disabled class="form-control" rows="3" placeholder="Enter Todo Description"></textarea>
     </div>
+    <div class="form-check form-switch">
+        <input class="form-check-input" asp-for="IsCompleted" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" asp-for="IsCompleted" for="flexSwitchCheckDefault">Did you Complete the Task?</label>
+    </div>
 
     <div class="row mt-4">
         <div class="col-6">
-            <a type="button" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary w-100">Edit</a>
+            <button type="submit" asp-action="ChangeStatus" asp-route-id="@Model.Id" class="btn btn-primary w-100">Finish The Task</button>
         </div>
-        
+
         <div class="col-6">
             <a type="button" asp-action="Index" class="btn btn-danger w-100">Back To My Tasks</a>
         </div>

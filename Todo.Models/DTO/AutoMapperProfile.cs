@@ -12,5 +12,7 @@ public class AutoMapperProfile : Profile
             .ReverseMap();
         CreateMap<TodoTaskResponse, TodoTask>()
             .ReverseMap();
+        CreateMap<TodoTaskUpdateRequest, TodoTaskResponse>()
+            .ReverseMap();
     }
 }

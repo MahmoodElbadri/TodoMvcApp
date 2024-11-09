@@ -18,6 +18,7 @@
                         <p class="card-text">@todo.Description</p>
                         <hr />
                         <a type="button" asp-action="Details" asp-route-id="@todo.Id" class="btn btn-primary">Details</a>
+                        <a type="button" asp-action="ChangeStatus" asp-route-id="@todo.Id" class="btn btn-danger">Change Status</a>
                     </div>
                 </div>
             </div>
